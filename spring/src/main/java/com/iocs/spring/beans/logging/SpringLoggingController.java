@@ -16,9 +16,9 @@ public class SpringLoggingController {
 
     @GetMapping(value = "/testLogging", produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<String> testLogging(){
-        logger.info("INFO");
-        logger.warn("WARN");
         logger.error("ERROR");
+        logger.warn("WARN");
+        logger.info("INFO");
         logger.debug("DEBUG");
         logger.trace("TRACE");
         return ResponseEntity.ok("Success");
