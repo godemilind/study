@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 //@CrossOrigin(origins = "http://localhost:8080")
@@ -30,7 +31,7 @@ public class TutorialController {
     }
 
     @PostMapping("/tutorials")
-    public ResponseEntity<Tutorial> createTutorial(@RequestBody Tutorial tutorial) {
+    public ResponseEntity<Tutorial> createTutorial(@Valid @RequestBody Tutorial tutorial) {
         return ResponseEntity.ok(tutorialRepository.save(tutorial));
     }
 

@@ -5,8 +5,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.client.RestClientTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.time.format.DateTimeFormatter;
+
 //@RunWith(SpringRunner.class)
-//@RestClientTest
+@RestClientTest
 public class TradeServiceTest {
 
     @Autowired
@@ -15,4 +17,6 @@ public class TradeServiceTest {
     public void testRest(){
         System.out.println(controller);
     }
+
+
 }
