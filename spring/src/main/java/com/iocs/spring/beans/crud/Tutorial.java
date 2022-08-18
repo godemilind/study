@@ -4,11 +4,11 @@ import com.iocs.spring.beans.crud.validator.Title;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+//import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.validation.constraints.NotBlank;
 
-@Document(collection = "tutorials")
+//@Document(collection = "tutorials")
 @Getter
 @Setter
 public class Tutorial {

@@ -4,6 +4,7 @@ import org.apache.catalina.connector.Connector;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -15,7 +16,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @SpringBootApplication
 @EnableScheduling
@@ -36,14 +41,14 @@ public class Application
 
 	}
 
-	private Connector redirectConnector() {
-		Connector connector = new Connector("org.apache.coyote.http11.Http11NioProtocol");
-		connector.setScheme("http");
-		connector.setPort(8080);
-		connector.setSecure(false);
-		connector.setRedirectPort(8443);
-		return connector;
-	}
+//	private Connector redirectConnector() {
+//		Connector connector = new Connector("org.apache.coyote.http11.Http11NioProtocol");
+//		connector.setScheme("http");
+//		connector.setPort(8080);
+//		connector.setSecure(false);
+//		connector.setRedirectPort(8443);
+//		return connector;
+//	}
 
 //	@Override
 //	protected void configure(HttpSecurity http) throws Exception
@@ -69,9 +74,14 @@ public class Application
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http
 				.csrf().disable()
-				.authorizeRequests().anyRequest().authenticated()
+				.authorizeRequests()
+				.antMatchers("/spring/h2-ui/**").permitAll()
+				.and()
+				.authorizeRequests()
+				.anyRequest().authenticated()
 				.and()
 				.httpBasic();
+		http.headers().frameOptions().disable();
 		return http.build();
 	}
 
@@ -80,9 +90,10 @@ public class Application
 		UserDetails user = User
 				.withUsername("admin")
 				.password("{noop}password")
-				.roles("USER")
+				.roles("ADMIN")
 				.build();
 		return new InMemoryUserDetailsManager(user);
 	}
 
 }
+
