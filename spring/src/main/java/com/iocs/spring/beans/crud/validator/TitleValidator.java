@@ -12,6 +12,8 @@ public class TitleValidator implements ConstraintValidator<Title,String> {
 
     @Override
     public boolean isValid(String s, ConstraintValidatorContext constraintValidatorContext) {
-        return titles.contains(s);
+        if(s != null && !s.isEmpty())
+            return titles.contains(s);
+        else return false;
     }
 }

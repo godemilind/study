@@ -1,5 +1,6 @@
 package com.iocs.spring.beans.logging;
 
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
@@ -10,17 +11,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(value = "/logging")
+@Slf4j
 public class SpringLoggingController {
-
-    private Logger logger = LoggerFactory.getLogger(SpringLoggingController.class);
 
     @GetMapping(value = "/testLogging", produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<String> testLogging(){
-        logger.error("ERROR");
-        logger.warn("WARN");
-        logger.info("INFO");
-        logger.debug("DEBUG");
-        logger.trace("TRACE");
+        log.error("ERROR");
+        log.warn("WARN");
+        log.info("INFO");
+        log.debug("DEBUG");
+        log.trace("TRACE");
         return ResponseEntity.ok("Success");
     }
 }
